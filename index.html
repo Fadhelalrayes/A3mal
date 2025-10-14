@@ -3,349 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ثواب الأعمال</title>
-    <link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+    <title>محرر HTML المباشر</title>
     <style>
-        :root {
-            --primary-color: #2c5aa0;
-            --secondary-color: #d4af37;
-            --accent-color: #8e44ad;
-            --light-color: #f8f9fa;
-            --dark-color: #343a40;
-            --success-color: #28a745;
-            --background-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            --card-gradient: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
-            --shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Scheherazade New', serif;
-        }
-        
+        /* --- Google Fonts for modern UI --- */
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap');
+
+        /* --- General Styling --- */
         body {
-            background: var(--background-gradient);
-            color: var(--dark-color);
-            min-height: 100vh;
-            padding: 20px;
-            line-height: 1.8;
+            font-family: 'Tajawal', sans-serif;
+            margin: 0;
+            background-color: #f0f2f5; /* خلفية رمادية فاتحة وعصرية */
+            color: #333;
+            overflow: hidden; /* منع ظهور شرائط التمرير على الجسم الرئيسي */
         }
-        
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: var(--card-gradient);
-            border-radius: 20px;
-            box-shadow: var(--shadow);
-            overflow: hidden;
-        }
-        
-        header {
-            background: var(--primary-color);
-            color: white;
-            padding: 25px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        header::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='0.1' d='M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,213.3C1248,235,1344,213,1392,202.7L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
-            background-size: cover;
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            position: relative;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-        
-        .date-container {
+
+        /* --- Header Styling --- */
+        .header {
+            background-color: #ffffff;
+            padding: 15px 30px;
+            border-bottom: 1px solid #e0e0e0;
             display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin: 15px 0;
-            position: relative;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
-        
-        .date-box {
-            background: rgba(255, 255, 255, 0.2);
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #1a237e; /* لون أزرق داكن أنيق */
+        }
+
+        /* --- Main Container (Split Screen) --- */
+        .container {
+            display: flex;
+            height: calc(100vh - 75px); /* ارتفاع الشاشة بالكامل ناقص ارتفاع الهيدر */
+        }
+
+        /* --- Panels Styling (Code and Preview) --- */
+        .panel {
+            width: 50%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .panel-header {
+            background-color: #fafafa;
             padding: 10px 20px;
-            border-radius: 10px;
-            backdrop-filter: blur(5px);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            font-weight: 700;
+            border-bottom: 1px solid #e0e0e0;
+            color: #555;
         }
-        
-        .content {
-            padding: 30px;
-        }
-        
-        .section {
-            margin-bottom: 30px;
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            border-right: 5px solid var(--secondary-color);
-            transition: transform 0.3s ease;
-        }
-        
-        .section:hover {
-            transform: translateY(-5px);
-        }
-        
-        h2 {
-            color: var(--primary-color);
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--secondary-color);
-            font-size: 1.8rem;
-        }
-        
-        h3 {
-            color: var(--accent-color);
-            margin: 15px 0 10px;
-            font-size: 1.4rem;
-        }
-        
-        p, li {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            text-align: justify;
-        }
-        
-        ul {
-            list-style-type: none;
-            padding-right: 20px;
-        }
-        
-        li {
-            margin-bottom: 15px;
-            position: relative;
-            padding-right: 25px;
-        }
-        
-        li::before {
-            content: "•";
-            color: var(--secondary-color);
-            font-weight: bold;
-            position: absolute;
-            right: 0;
-            font-size: 1.5rem;
-        }
-        
-        .source {
-            font-size: 0.9rem;
-            color: #6c757d;
-            margin-top: 5px;
-            font-style: italic;
-        }
-        
-        footer {
-            text-align: center;
+
+        /* --- Code Editor Panel --- */
+        #code-editor {
+            flex-grow: 1;
+            border: none;
             padding: 20px;
-            background: var(--dark-color);
+            font-family: 'Courier New', Courier, monospace; /* خط مناسب للكود */
+            font-size: 16px;
+            line-height: 1.6;
+            background-color: #282c34; /* خلفية داكنة للمحرر */
+            color: #abb2bf; /* لون نص فاتح ومريح للعين */
+            resize: none; /* منع تغيير حجم مربع النص */
+            outline: none; /* إزالة الإطار عند التركيز */
+            direction: ltr; /* جعل اتجاه الكتابة من اليسار لليمين للكود */
+            text-align: left;
+        }
+
+        /* --- Preview Panel --- */
+        #preview-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background-color: #ffffff;
+        }
+
+        /* --- Action Button Styling --- */
+        .run-button {
+            background-image: linear-gradient(45deg, #3f51b5, #1a237e); /* تدرج لوني جميل */
             color: white;
-            font-size: 1rem;
+            border: none;
+            padding: 10px 25px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            border-radius: 50px; /* حواف دائرية بالكامل */
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(63, 81, 181, 0.4);
+        }
+
+        .run-button:hover {
+            transform: translateY(-2px); /* تأثير رفع بسيط عند المرور */
+            box-shadow: 0 6px 20px rgba(63, 81, 181, 0.5);
         }
         
-        .decoration {
-            position: absolute;
-            opacity: 0.1;
-            font-size: 8rem;
-            color: var(--secondary-color);
-            z-index: 0;
+        .run-button:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 15px rgba(63, 81, 181, 0.4);
         }
-        
-        .decoration-1 {
-            top: 20px;
-            left: 20px;
-        }
-        
-        .decoration-2 {
-            bottom: 20px;
-            right: 20px;
-        }
-        
-        @media (max-width: 768px) {
-            .date-container {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .content {
-                padding: 20px;
-            }
-        }
+
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="decoration decoration-1">✸</div>
-            <div class="decoration decoration-2">✸</div>
-            <h1>ثواب الأعمال</h1>
-            <div class="date-container">
-                <div class="date-box">
-                    <span id="hijri-date">التاريخ الهجري: </span>
-                </div>
-                <div class="date-box">
-                    <span id="gregorian-date">التاريخ الميلادي: </span>
-                </div>
-            </div>
-        </header>
-        
-        <div class="content">
-            <div class="section">
-                <h2>أعمال اليوم المستحبة</h2>
-                <div id="daily-activities">
-                    <!-- سيتم ملء هذا القسم بالاعمال اليومية عبر الجافاسكريبت -->
-                </div>
-            </div>
-            
-            <div class="section">
-                <h2>أدعية اليوم</h2>
-                <div id="daily-prayers">
-                    <!-- سيتم ملء هذا القسم بأدعية اليوم عبر الجافاسكريبت -->
-                </div>
-            </div>
-            
-            <div class="section">
-                <h2>مستحبات عامة</h2>
-                <ul>
-                    <li>صلاة الليل والتهجد</li>
-                    <li>قراءة القرآن الكريم ولو آيات قليلة</li>
-                    <li>الصلاة على محمد وآل محمد</li>
-                    <li>صلاة النوافل اليومية</li>
-                    <li>ذكر الله تعالى والدعاء</li>
-                    <li>بر الوالدين وصلة الرحم</li>
-                    <li>الصدقة وإغاثة الملهوف</li>
-                </ul>
-                <p class="source">مصدر: مفاتيح الجنان - الشيخ عباس القمي</p>
-            </div>
+
+    <header class="header">
+        <h1>محرر HTML المباشر</h1>
+        <button id="run-btn" class="run-button">▶&nbsp; تشغيل الكود</button>
+    </header>
+
+    <main class="container">
+        <!-- لوحة إدخال الكود -->
+        <div class="panel">
+            <div class="panel-header">مربع الكود (HTML)</div>
+            <textarea id="code-editor" placeholder="الصق كود HTML هنا..."></textarea>
         </div>
-        
-        <footer>
-            إعداد وبرمجة فاضل الريس
-        </footer>
-    </div>
+
+        <!-- لوحة عرض النتيجة -->
+        <div class="panel" style="border-right: 1px solid #e0e0e0;">
+            <div class="panel-header">المعاينة المباشرة</div>
+            <iframe id="preview-frame"></iframe>
+        </div>
+    </main>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // تحديث التاريخ الهجري والميلادي
-            updateDates();
-            
-            // عرض الأعمال والأدعية حسب اليوم
-            showDailyContent();
-        });
+        // الحصول على العناصر من الصفحة
+        const runButton = document.getElementById('run-btn');
+        const codeEditor = document.getElementById('code-editor');
+        const previewFrame = document.getElementById('preview-frame');
 
-        // دالة لتحديث التاريخ الهجري والميلادي
-        function updateDates() {
-            const now = new Date();
+        // وظيفة لتشغيل الكود
+        function runCode() {
+            // الحصول على الكود من مربع النص
+            const code = codeEditor.value;
             
-            // التاريخ الميلادي
-            const gregorianDate = now.toLocaleDateString('ar-SA', {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-            });
-            document.getElementById('gregorian-date').textContent += gregorianDate;
-            
-            // التاريخ الهجري (تقريبي)
-            const hijriDate = now.toLocaleDateString('ar-SA', {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-                calendar: 'islamic-umalqura'
-            });
-            document.getElementById('hijri-date').textContent += hijriDate;
+            // كتابة الكود داخل إطار المعاينة لعرضه
+            const previewDoc = previewFrame.contentWindow.document;
+            previewDoc.open();
+            previewDoc.write(code);
+            previewDoc.close();
         }
 
-        // دالة لعرض المحتوى اليومي
-        function showDailyContent() {
-            const now = new Date();
-            const dayOfMonth = now.getDate(); // يوم الشهر
-            const dayOfWeek = now.getDay(); // يوم الأسبوع (0: الأحد، 1: الإثنين، ...)
-            
-            const activitiesElement = document.getElementById('daily-activities');
-            const prayersElement = document.getElementById('daily-prayers');
-            
-            // الأعمال اليومية (نموذج مبسط)
-            let dailyActivities = '';
-            let dailyPrayers = '';
-            
-            // الأعمال حسب أيام الأسبوع
-            switch(dayOfWeek) {
-                case 0: // الأحد
-                    dailyActivities = `
-                        <h3>أعمال يوم الأحد</h3>
-                        <ul>
-                            <li>صلاة ركعتين تقرأ في الأولى بعد الفاتحة سورة التوحيد (50 مرة)، وفي الثانية بعد الفاتحة سورة القدر (50 مرة)</li>
-                            <li>الدعاء بـ "يا رب الأرباب يا مسبب الأسباب يا باعث الأنبياء والرسل"</li>
-                            <li>قراءة سورة يس</li>
-                        </ul>
-                        <p class="source">مصدر: مفاتيح الجنان - أعمال أيام الأسبوع</p>
-                    `;
-                    dailyPrayers = `
-                        <h3>دعاء يوم الأحد</h3>
-                        <p>اللهم إني أسألك بحق محمد وآل محمد أن تصلي على محمد وآل محمد وأن تجعل يومي هذا يوم خير وبركة، وتباعد بيني وبين سيئاتي كما باعدت بين المشرق والمغرب.</p>
-                        <p class="source">مصدر: مفاتيح الجنان - أدعية أيام الأسبوع</p>
-                    `;
-                    break;
-                case 1: // الإثنين
-                    dailyActivities = `
-                        <h3>أعمال يوم الإثنين</h3>
-                        <ul>
-                            <li>صلاة ركعتين تقرأ في كل ركعة بعد الفاتحة سورة التوحيد (10 مرات)</li>
-                            <li>زيارة الإمام علي بن أبي طالب (ع) ولو من بعيد</li>
-                            <li>الإكثار من الصلاة على محمد وآل محمد</li>
-                        </ul>
-                        <p class="source">مصدر: مفاتيح الجنان - أعمال أيام الأسبوع</p>
-                    `;
-                    dailyPrayers = `
-                        <h3>دعاء يوم الإثنين</h3>
-                        <p>اللهم إني أسألك بحق محمد وآل محمد أن تفتح لي في هذا اليوم أبواب رحمتك، وتغلق عني أبواب معصيتك، وتهديني إلى صراطك المستقيم.</p>
-                        <p class="source">مصدر: مفاتيح الجنان - أدعية أيام الأسبوع</p>
-                    `;
-                    break;
-                // يمكن إضافة باقي أيام الأسبوع هنا
-                default:
-                    dailyActivities = `
-                        <h3>أعمال اليوم</h3>
-                        <ul>
-                            <li>صلاة الليل والتهجد</li>
-                            <li>قراءة القرآن الكريم</li>
-                            <li>الصلاة على محمد وآل محمد (100 مرة على الأقل)</li>
-                            <li>الدعاء لأخوانك المؤمنين</li>
-                        </ul>
-                        <p class="source">مصدر: مفاتيح الجنان - أعمال عامة</p>
-                    `;
-                    dailyPrayers = `
-                        <h3>دعاء اليوم</h3>
-                        <p>اللهم إني أسألك بحق محمد وآل محمد أن تتقبل صلاتي ودعائي، وتغفر لي ذنبي وتستر عيبي، وتيسر أموري، وتقضي حوائجي.</p>
-                        <p class="source">مصدر: مفاتيح الجنان - أدعية عامة</p>
-                    `;
-            }
-            
-            // إضافة المحتوى إلى الصفحة
-            activitiesElement.innerHTML = dailyActivities;
-            prayersElement.innerHTML = dailyPrayers;
-        }
+        // ربط زر التشغيل بالوظيفة
+        runButton.addEventListener('click', runCode);
+
     </script>
+
 </body>
 </html>

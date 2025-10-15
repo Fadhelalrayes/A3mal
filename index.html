@@ -3,188 +3,210 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>محرر الأكواد الاحترافي</title>
-    <style>
-        /* --- Google Fonts --- */
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+    <title>محرر Manus المباشر</title>
 
-        /* --- Global Styles & Background --- */
+    <!-- 1. تضمين مكتبة CodeMirror (CSS) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/theme/dracula.min.css">
+
+    <style>
+        /* CSS للتصميم العام للصفحة */
         :root {
-            --primary-color: #6a11cb;
-            --secondary-color: #2575fc;
-            --editor-bg: rgba(22, 27, 34, 0.95);
-            --preview-bg: #ffffff;
-            --text-color: #e6edf3;
-            --border-color: rgba(255, 255, 255, 0.1);
+            --background-color: #1e1e1e;
+            --editor-background: #282a36; /* لون ثيم Dracula */
+            --border-color: #44475a;
+            --text-color: #f8f8f2;
+            --header-height: 50px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            font-family: 'Cairo', sans-serif;
-            margin: 0;
-            height: 100vh;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: var(--background-color);
             color: var(--text-color);
             display: flex;
             flex-direction: column;
+            height: 100vh;
             overflow: hidden;
         }
 
-        /* --- Header --- */
-        header {
-            padding: 15px 30px;
+        .main-header {
+            background-color: var(--editor-background);
+            padding: 0 25px;
+            height: var(--header-height);
             display: flex;
             align-items: center;
-            background: rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            z-index: 10;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #bd93f9; /* لون بنفسجي من ثيم Dracula */
         }
 
-        header h1 {
-            margin: 0;
-            font-size: 22px;
-            font-weight: 700;
+        .editor-container {
             display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        
-        header h1 svg {
-            width: 30px;
-            height: 30px;
+            height: calc(100vh - var(--header-height));
+            width: 100%;
         }
 
-        /* --- Main Container --- */
-        .main-container {
-            display: flex;
-            flex-grow: 1;
-            padding: 20px;
-            gap: 20px;
-        }
-
-        /* --- Panels (Editor & Preview) --- */
-        .panel {
-            width: 50%;
+        .editor-pane, .preview-pane {
             height: 100%;
             display: flex;
             flex-direction: column;
-            background: var(--editor-bg);
-            border-radius: 15px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(15px);
-            overflow: hidden; /* To keep children within rounded corners */
+            width: 50%;
+        }
+        
+        .preview-pane {
+            background-color: white;
+            border-right: 1px solid var(--border-color);
         }
 
-        .panel-header {
-            padding: 12px 20px;
-            font-weight: 700;
+        .code-area {
+            height: 50%;
             display: flex;
-            align-items: center;
-            gap: 10px;
-            background: rgba(0, 0, 0, 0.2);
+            flex-direction: column;
+        }
+
+        .code-area-header {
+            background-color: #191a21;
+            padding: 8px 15px;
+            font-weight: bold;
+            font-size: 0.9rem;
             border-bottom: 1px solid var(--border-color);
-        }
-        
-        .panel-header svg {
-            width: 20px;
-            height: 20px;
-            opacity: 0.8;
+            border-top: 1px solid var(--border-color);
         }
 
-        /* --- Code Editor --- */
-        #code-editor {
+        /* تخصيص مظهر CodeMirror */
+        .CodeMirror {
             flex-grow: 1;
-            border: none;
-            padding: 20px;
-            font-family: 'Fira Code', 'Courier New', monospace;
-            font-size: 15px;
-            line-height: 1.7;
-            background-color: transparent;
-            color: var(--text-color);
-            resize: none;
-            outline: none;
-            direction: ltr;
-            text-align: left;
+            font-size: 1rem;
+            line-height: 1.5;
+            font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
+            height: 100%;
         }
 
-        /* --- Preview Panel --- */
-        .preview-panel {
-            background: var(--preview-bg);
-        }
-        
-        .preview-header {
-            background: #e8e8e8;
-            padding: 8px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            border-bottom: 1px solid #ccc;
-        }
-        .dot {
-            width: 12px; height: 12px; border-radius: 50%;
-        }
-        .dot.red { background: #ff5f57; }
-        .dot.yellow { background: #ffbd2e; }
-        .dot.green { background: #28c940; }
-
-        #preview-frame {
+        iframe {
             width: 100%;
             height: 100%;
             border: none;
-            background-color: var(--preview-bg);
+            background-color: #fff;
         }
-
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20 18V20H22V18H20ZM18.5 13.25C18.5 13.94 17.94 14.5 17.25 14.5H15.75C15.06 14.5 14.5 13.94 14.5 13.25V11.75C14.5 11.06 15.06 10.5 15.75 10.5H17.25C17.94 10.5 18.5 11.06 18.5 11.75V13.25ZM12.5 13.25C12.5 13.94 11.94 14.5 11.25 14.5H9.75C9.06 14.5 8.5 13.94 8.5 13.25V11.75C8.5 11.06 9.06 10.5 9.75 10.5H11.25C11.94 10.5 12.5 11.06 12.5 11.75V13.25ZM6.5 13.25C6.5 13.94 5.94 14.5 5.25 14.5H3.75C3.06 14.5 2.5 13.94 2.5 13.25V11.75C2.5 11.06 3.06 10.5 3.75 10.5H5.25C5.94 10.5 6.5 11.06 6.5 11.75V13.25ZM22 8V4H2V8H22ZM2 2H22C23.11 2 24 2.9 24 4V8C24 9.11 23.11 10 22 10H2V4C2 2.9 2.9 2 2 2Z"></path></svg>
-            محرر الأكواد الاحترافي
-        </h1>
+    <header class="main-header">
+        محرر Manus
     </header>
 
-    <main class="main-container">
-        <!-- لوحة الكود -->
-        <div class="panel">
-            <div class="panel-header">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8.36364 18.3636L10.4853 16.242L8.36364 14.1203L7.65653 14.8274L9.07107 16.242L7.65653 17.6565L8.36364 18.3636ZM15.6364 18.3636L16.3435 17.6565L14.9289 16.242L16.3435 14.8274L15.6364 14.1203L13.5147 16.242L15.6364 18.3636ZM12.7071 20.4853L11.2929 20.4853L14.1213 3.51472H15.5355L12.7071 20.4853Z"></path></svg>
-                <span>الكود المصدر (HTML)</span>
+    <div class="editor-container">
+        <div class="editor-pane">
+            <!-- منطقة محرر HTML -->
+            <div class="code-area">
+                <div class="code-area-header">HTML</div>
+                <textarea id="html-code"></textarea>
             </div>
-            <textarea id="code-editor" placeholder="ضع كود المذكرة أو أي كود HTML هنا... وستظهر النتيجة فوراً"></textarea>
+            <!-- منطقة محرر CSS -->
+            <div class="code-area">
+                <div class="code-area-header">CSS</div>
+                <textarea id="css-code"></textarea>
+            </div>
         </div>
+        <!-- منطقة المعاينة -->
+        <div class="preview-pane">
+            <iframe id="preview-frame" sandbox="allow-scripts"></iframe>
+        </div>
+    </div>
 
-        <!-- لوحة المعاينة -->
-        <div class="panel preview-panel">
-            <div class="preview-header">
-                <div class="dot red"></div>
-                <div class="dot yellow"></div>
-                <div class="dot green"></div>
-            </div>
-            <iframe id="preview-frame"></iframe>
-        </div>
-    </main>
+    <!-- 2. تضمين مكتبة CodeMirror (JavaScript) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/mode/xml/xml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/mode/css/css.min.js"></script>
 
     <script>
-        const codeEditor = document.getElementById('code-editor');
-        const previewFrame = document.getElementById('preview-frame');
+        // 3. الكود المسؤول عن تشغيل المحرر والتحديث المباشر
+        document.addEventListener('DOMContentLoaded', () => {
+            // إعدادات مشتركة لمحررات CodeMirror
+            const editorOptions = {
+                lineNumbers: true,
+                theme: 'dracula',
+                lineWrapping: true,
+                autofocus: true
+            };
 
-        // وظيفة التحديث الفوري
-        function updatePreview() {
-            const code = codeEditor.value;
-            const previewDoc = previewFrame.contentWindow.document;
-            previewDoc.open();
-            previewDoc.write(code);
-            previewDoc.close();
-        }
+            // تهيئة محرر HTML
+            const htmlEditor = CodeMirror.fromTextArea(document.getElementById('html-code'), {
+                ...editorOptions,
+                mode: 'xml',
+            });
 
-        // استدعاء الوظيفة عند أي إدخال في المحرر
-        codeEditor.addEventListener('input', updatePreview);
-        
-        // تحديث أولي عند تحميل الصفحة (إذا كان هناك كود مبدئي)
-        updatePreview();
+            // تهيئة محرر CSS
+            const cssEditor = CodeMirror.fromTextArea(document.getElementById('css-code'), {
+                ...editorOptions,
+                mode: 'css'
+            });
+
+            // وضع كود مبدئي في المحررات
+            const initialHtml = `<h1>أهلاً بك في محرر Manus!</h1>
+<p>هذا محرر أكواد مباشر.</p>
+<button class="my-button">اضغط هنا</button>
+`;
+            const initialCss = `body {
+    font-family: sans-serif;
+    padding: 20px;
+    background-color: #f0f8ff;
+    color: #333;
+}
+
+.my-button {
+    background-color: #bd93f9; /* بنفسجي */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: transform 0.2s;
+}
+
+.my-button:hover {
+    transform: scale(1.1);
+}`;
+            
+            htmlEditor.setValue(initialHtml);
+            cssEditor.setValue(initialCss);
+
+            const previewFrame = document.getElementById('preview-frame');
+
+            // دالة لتحديث المعاينة
+            function updatePreview() {
+                const htmlCode = htmlEditor.getValue();
+                const cssCode = cssEditor.getValue();
+
+                const documentContent = `
+                    <html>
+                        <head>
+                            <style>${cssCode}</style>
+                        </head>
+                        <body>${htmlCode}</body>
+                    </html>
+                `;
+                
+                // استخدام srcdoc هو الطريقة الأكثر أمانًا لتحديث محتوى iframe
+                previewFrame.srcdoc = documentContent;
+            }
+
+            // ربط حدث التغيير في المحررات بدالة التحديث
+            htmlEditor.on('change', updatePreview);
+            cssEditor.on('change', updatePreview);
+
+            // تحديث المعاينة لأول مرة عند تحميل الصفحة
+            updatePreview();
+        });
     </script>
 
 </body>

@@ -4,18 +4,18 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 
-<title>مواقيت الصلاة وفق المذهب الجعفري | أزرق–فضي–أبيض</title>
-<meta name="description" content="مواقيت الصلاة وفق المذهب الجعفري بتصميم فاتح أزرق مع لمسات فضية وبيضاء؛ عرض الحدث القادم والعدّاد الذكي والتاريخ الهجري.">
+<title>مواقيت الصلاة وفق المذهب الجعفري | أخضر–ذهبي–أبيض</title>
+<meta name="description" content="مواقيت الصلاة وفق المذهب الجعفري بتصميم فاتح أخضر مع لمسات ذهبية وبيضاء؛ عرض الحدث القادم والعدّاد الذكي والتاريخ الهجري.">
 <link rel="canonical" href="">
 <link rel="alternate" hreflang="ar" href="">
 
 <!-- Open Graph / Twitter -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="مواقيت الصلاة الجعفرية — أزرق–فضي–أبيض">
+<meta property="og:title" content="مواقيت الصلاة الجعفرية — أخضر–ذهبي–أبيض">
 <meta property="og:description" content="مواقيت دقيقة، حدث قادم، عدّاد، وتاريخ هجري بتصميم رسمي فاتح.">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="مواقيت الصلاة الجعفرية — أزرق–فضي–أبيض">
+<meta name="twitter:title" content="مواقيت الصلاة الجعفرية — أخضر–ذهبي–أبيض">
 <meta name="twitter:description" content="مواقيت دقيقة، حدث قادم، عدّاد، وتاريخ هجري بتصميم رسمي فاتح.">
 
 <!-- Fonts -->
@@ -36,133 +36,143 @@
 </script>
 
 <style>
-  /* لوحة احترافية: أزرق فاتح مع فضي وأبيض */
+  /* لوحة احترافية: أخضر فاتح مع ذهبي وأبيض */
   :root{
-    --bg:#f0f4f8;            /* خلفية عامة أزرق فاتح */
+    --bg:#f0f7f4;            /* خلفية عامة أخضر فاتح */
     --card:#ffffff;          /* بطاقات بيضاء ناصعة */
-    --ink:#0a2540;           /* نص أزرق داكن احترافي */
-    --muted:#6b7280;         /* نص ثانوي رمادي */
-    --primary:#007bff;       /* أزرق أساسي جذاب */
-    --primary-2:#0056b3;     /* أزرق أغمق */
-    --border:#d1e3ff;        /* حدود مائلة للأزرق الفاتح */
-    --glow:0 10px 26px rgba(0,123,255,.12); /* توهج أزرق خفيف */
-    --hadith:#004085;        /* أزرق داكن للنصوص المميّزة */
-    --row-grad:linear-gradient(90deg, rgba(0,123,255,.16), rgba(0,0,0,.03) 60%, transparent);
-    --chip-grad:linear-gradient(135deg, rgba(0,123,255,.10), rgba(0,0,0,.02));
-    --accent-txt:linear-gradient(90deg, var(--primary), #66b2ff);
+    --ink:#0a3d2a;           /* نص أخضر داكن احترافي */
+    --muted:#5e6e66;         /* نص ثانوي رمادي أخضر */
+    --primary:#28a745;       /* أخضر أساسي جذاب */
+    --primary-2:#1e7e34;     /* أخضر أغمق */
+    --border:#d4f0dc;        /* حدود مائلة للأخضر الفاتح */
+    --glow:0 12px 28px rgba(40,167,69,.08); /* توهج أخضر خفيف محسن */
+    --hadith:#155724;        /* أخضر داكن للنصوص المميّزة */
+    --row-grad:linear-gradient(90deg, rgba(40,167,69,.12), rgba(0,0,0,.02) 60%, transparent);
+    --chip-grad:linear-gradient(135deg, rgba(40,167,69,.08), rgba(0,0,0,.01));
+    --accent-txt:linear-gradient(90deg, var(--primary), #5dcb75);
   }
 
   *{box-sizing:border-box}
   body{
-    margin:0; padding:20px; background:var(--bg);
+    margin:0; padding:24px; background:var(--bg);
     color:var(--ink);
     font-family:"Noto Sans Arabic",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    line-height:1.6; /* تحسين للقراءة */
   }
-  .container{width:min(1100px,100%); margin:auto; display:flex; flex-direction:column; gap:18px}
+  .container{width:min(1200px,100%); margin:auto; display:flex; flex-direction:column; gap:20px}
 
   .hero{
     position:relative; overflow:hidden;
     background:var(--card);
     border:1px solid var(--border);
-    border-radius:18px;
+    border-radius:20px; /* زوايا أكثر نعومة */
     box-shadow:var(--glow);
-    padding:22px; text-align:center;
+    padding:24px; text-align:center;
+    transition: box-shadow 0.3s ease; /* انتقال سلس */
   }
-  .hero::before{
-    content:""; position:absolute; inset:-35% -20% auto auto; height:210px; width:65%;
-    background: radial-gradient(closest-side, rgba(0,123,255,.18), rgba(0,123,255,.08) 60%, transparent);
-    filter: blur(18px); pointer-events:none;
-  }
+  .hero:hover { box-shadow: 0 14px 32px rgba(40,167,69,.12); } /* تفاعل احترافي */
+  /* إزالة التدرج */
+  /* .hero::before { ... } تم تعطيله */
+
   .heroTitle{
-    margin:0; font-family:"Amiri",serif; font-size:1.8rem; letter-spacing:.2px;
+    margin:0; font-family:"Amiri",serif; font-size:2rem; letter-spacing:.1px; /* خط أكبر وأنيق */
     background:var(--accent-txt); -webkit-background-clip:text; background-clip:text; color:transparent;
   }
 
   .locationBox{
-    display:flex; justify-content:space-between; align-items:center; gap:10px;
+    display:flex; justify-content:space-between; align-items:center; gap:12px;
     background:var(--card); border:1px solid var(--border);
-    border-radius:16px; box-shadow:var(--glow); padding:14px;
+    border-radius:18px; box-shadow:var(--glow); padding:16px;
+    transition: transform 0.2s ease; /* تحسين تفاعلي */
   }
-  .place{font-weight:900; font-size:1.08rem; color:var(--ink)}
-  .subPlace{font-size:.9rem; color:var(--muted)}
+  .locationBox:hover { transform: translateY(-2px); }
+  .place{font-weight:900; font-size:1.1rem; color:var(--ink)}
+  .subPlace{font-size:.92rem; color:var(--muted)}
 
   .nextBox{
-    background:var(--card); border:1px solid var(--border); border-radius:16px; box-shadow:var(--glow); padding:16px; display:grid; gap:10px
+    background:var(--card); border:1px solid var(--border); border-radius:18px; box-shadow:var(--glow); padding:18px; display:grid; gap:12px;
+    transition: box-shadow 0.3s ease;
   }
+  .nextBox:hover { box-shadow: 0 14px 32px rgba(40,167,69,.12); }
   .nextTitle{
     font-weight:900; text-align:center;
     background:var(--accent-txt); -webkit-background-clip:text; background-clip:text; color:transparent;
-    letter-spacing:.35px;
+    letter-spacing:.3px;
   }
   .nextRow{display:flex; justify-content:space-between; align-items:center; font-weight:800}
-  .nextName{font-size:1.06rem}
+  .nextName{font-size:1.08rem}
   .nextAt{
     font-variant-numeric:tabular-nums;
-    color:var(--ink); padding:.28rem .6rem; border:1px solid var(--border); border-radius:10px; background:#fff;
-    box-shadow: inset 0 0 0 1px rgba(0,0,0,.02);
+    color:var(--ink); padding:.3rem .65rem; border:1px solid var(--border); border-radius:12px; background:#fff;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,.01);
   }
-  .countdown{display:flex; justify-content:center; gap:10px; font-weight:900; font-size:1.6rem; letter-spacing:.5px; direction:ltr}
+  .countdown{display:flex; justify-content:center; gap:12px; font-weight:900; font-size:1.7rem; letter-spacing:.4px; direction:ltr}
   .cd-seg{
-    min-width:2ch; text-align:center; padding:.32rem .72rem;
-    border:1px solid var(--border); /* إطار أزرق فاتح */
-    border-radius:12px; background:#fff
+    min-width:2.2ch; text-align:center; padding:.35rem .75rem;
+    border:1px solid var(--border); /* إطار أخضر فاتح */
+    border-radius:14px; background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,.05); /* ظل خفيف */
   }
-  .cd-colon{opacity:.7}
-  .note{font-size:.92rem; color:var(--muted); text-align:center}
+  .cd-colon{opacity:.75}
+  .note{font-size:.94rem; color:var(--muted); text-align:center}
 
-  .infoRow{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+  .infoRow{display:grid; grid-template-columns:1fr 1fr; gap:18px}
   @media(max-width:720px){.infoRow{grid-template-columns:1fr}}
   .chip{
-    background:var(--card); border:1px solid var(--border); border-radius:16px; box-shadow:var(--glow); padding:12px;
-    display:flex; align-items:center; gap:12px;
+    background:var(--card); border:1px solid var(--border); border-radius:18px; box-shadow:var(--glow); padding:14px;
+    display:flex; align-items:center; gap:14px;
     background-image:var(--chip-grad);
+    transition: transform 0.2s ease;
   }
+  .chip:hover { transform: translateY(-2px); }
   .ico{
-    width:38px; height:38px; display:grid; place-items:center; border-radius:10px;
-    background:radial-gradient(circle at 30% 30%, rgba(0,123,255,.28), rgba(0,123,255,.08) 60%, transparent);
+    width:40px; height:40px; display:grid; place-items:center; border-radius:12px;
+    background:radial-gradient(circle at 30% 30%, rgba(40,167,69,.25), rgba(40,167,69,.06) 60%, transparent);
     border:1px solid var(--border);
-    color:var(--ink); font-size:1.2rem
+    color:var(--ink); font-size:1.25rem
   }
   .stack{display:flex; flex-direction:column}
-  .label{font-size:.86rem; color:var(--muted); font-weight:800}
-  .value{font-weight:900; font-size:1.02rem; font-variant-numeric:tabular-nums}
+  .label{font-size:.88rem; color:var(--muted); font-weight:800}
+  .value{font-weight:900; font-size:1.04rem; font-variant-numeric:tabular-nums}
 
   .card{
-    background:var(--card); border:1px solid var(--border); border-radius:16px; box-shadow:var(--glow); padding:12px
+    background:var(--card); border:1px solid var(--border); border-radius:18px; box-shadow:var(--glow); padding:14px;
+    transition: box-shadow 0.3s ease;
   }
+  .card:hover { box-shadow: 0 14px 32px rgba(40,167,69,.12); }
   .card h3{
-    margin:0 0 10px; font-size:1.05rem; font-weight:900; text-align:center;
+    margin:0 0 12px; font-size:1.1rem; font-weight:900; text-align:center;
     background:var(--accent-txt); -webkit-background-clip:text; background-clip:text; color:transparent;
   }
   table{width:100%; border-collapse:collapse}
-  th,td{padding:12px; border-bottom:1px solid var(--border); font-size:1rem}
-  th{background:#f8fbff; font-weight:900; color:var(--ink)}
+  th,td{padding:14px; border-bottom:1px solid var(--border); font-size:1.02rem}
+  th{background:#f8fcf9; font-weight:900; color:var(--ink)}
   td.name{text-align:right; font-weight:800}
   td.time{text-align:left; font-weight:900}
   tr.next td{background:var(--row-grad)}
+  tr:hover { background: rgba(40,167,69,.04); transition: background 0.2s; } /* تحسين تفاعلي للجدول */
 
-  .events{display:none; background:var(--card); border:1px solid var(--border); border-radius:16px; box-shadow:var(--glow); padding:14px}
+  .events{display:none; background:var(--card); border:1px solid var(--border); border-radius:18px; box-shadow:var(--glow); padding:16px}
   .events h3{
-    margin:0 0 8px; font-size:1.02rem; font-weight:900; text-align:center;
+    margin:0 0 10px; font-size:1.04rem; font-weight:900; text-align:center;
     background:var(--accent-txt); -webkit-background-clip:text; background-clip:text; color:transparent;
   }
-  .evtGrid{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+  .evtGrid{display:grid; grid-template-columns:1fr 1fr; gap:14px}
   @media(max-width:720px){.evtGrid{grid-template-columns:1fr}}
-  .evtCol{border:1px dashed var(--border); border-radius:12px; padding:10px; background:#fff}
-  .evtCol h4{margin:0 0 6px; font-size:.95rem; color:var(--ink)}
-  .evtItem{padding:6px 0; border-bottom:1px solid var(--border)}
+  .evtCol{border:1px dashed var(--border); border-radius:14px; padding:12px; background:#fff}
+  .evtCol h4{margin:0 0 8px; font-size:.97rem; color:var(--ink)}
+  .evtItem{padding:8px 0; border-bottom:1px solid var(--border)}
   .evtItem:last-child{border-bottom:none}
   .evtText{font-weight:800}
 
-  .hadith{background:var(--card); border:1px solid var(--border); border-radius:16px; box-shadow:var(--glow); padding:16px; text-align:center}
-  .htext{margin:0; font-size:1.08rem; color:var(--hadith); line-height:1.9}
+  .hadith{background:var(--card); border:1px solid var(--border); border-radius:18px; box-shadow:var(--glow); padding:18px; text-align:center}
+  .htext{margin:0; font-size:1.1rem; color:var(--hadith); line-height:1.95; font-style:italic; /* تحسين للحديث */}
   .hsrc{
-    display:inline-block; margin-top:12px; padding:6px 14px; border-radius:12px;
+    display:inline-block; margin-top:14px; padding:8px 16px; border-radius:14px;
     background:#fff; border:1px solid var(--border);
     font-weight:800; color:#333
   }
 
-  footer{text-align:center; margin-top:8px}
+  footer{text-align:center; margin-top:10px; font-size:0.9rem;}
   .credit{color:var(--hadith); font-weight:800}
 </style>
 </head>
